@@ -11,20 +11,18 @@ def main(argv=None):
         base_dir=Path.cwd() / "HHD_gender",
         image_shape=(400, 400, 1)
     )
-    train_images = HHD_engine.train_images
-    train_labels = HHD_engine.train_labels
-    val_images = HHD_engine.val_images
-    val_labels = HHD_engine.val_labels
-    test_images = HHD_engine.test_images
-    test_labels = HHD_engine.test_labels
+    if HHD_engine.load_model() :
+        print("Model loaded.")
+        print("Model testing:")
+        features = features_extract_combine(HHD_engine.train_images)
+        HHD_engine.train_model(features, HHD_engine.train_labels)
 
-    features = features_extract_combine(train_images)
-    HHD_engine.train_model(features, train_labels)
     print("Model validation:")
-    HHD_engine.validation_model(val_images, val_labels)
+    HHD_engine.validation_model(HHD_engine.val_images, HHD_engine.val_labels)
     print("Model testing:")
-    HHD_engine.test_model(test_images, test_labels)
-
+    HHD_engine.test_model(HHD_engine.test_images, HHD_engine.test_labels)
+    if HHD_engine.load_model():
+        print("Model saved.")
     HHD_engine.save_model()
 
 if __name__ == "__main__":

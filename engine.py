@@ -8,7 +8,7 @@ from data_loader import DataLoader
 from label_splitter import *
 from pre_process import PreProcess
 from collections import Counter
-from sklearn.metrics import accuracy_score,f1_score
+from sklearn.metrics import accuracy_score
 
 class Engine:
 
@@ -109,8 +109,8 @@ class Engine:
             print("Model already exists. Please delete the file or load the model.")
 
     def load_model(self, filename="saved_model.pkl"):
+        # Load model if it exists
         if self.model is not None:
-            print("Model already loaded.")
             return self.model
         with open(filename, "rb") as f:
             self.model = pickle.load(f)
