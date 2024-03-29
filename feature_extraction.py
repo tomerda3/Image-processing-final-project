@@ -17,16 +17,16 @@ def extract_lbp_features(images, radius=1, points=8):
                        for image in images])
     return lbp_features.reshape(len(images), -1)  # Reshape for clarity
 
-def preprocess_and_extract_features(self, images):
+def features_extract_combine(images,radius=1, points=8):
     # Preprocess images (resize, binarize, etc.)
 
     # Extract Haralick features
     print("Extracting Haralick features...")
-    haralick_features = self.extract_haralick_features(images)
+    haralick_features = extract_haralick_features(images)
 
     # Extract LBP features
     print("Extracting LBP features...")
-    lbp_features = self.extract_lbp_features(images)
+    lbp_features = extract_lbp_features(images, radius, points)
 
     # Combine features (consider weighting or other techniques if needed)
     print("Combining features...")
