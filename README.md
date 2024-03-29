@@ -11,7 +11,6 @@ Phone: 0547706109
 Project Description: Gender Classification Using Local Binary Patterns (LBP) and SVM This project aims to develop a machine learning model for classifying textures in images. The model focuses on utilizing Local Binary Patterns (LBP) features and a Support Vector Machine (SVM) classifier.
 
 Main Stages:
-
 Data Preparation:
 Loads images with various textures (man and woman free handwrite from the folders:train,val, test).
 Splits data into training evaluating and testing sets for model development and evaluation.
@@ -40,6 +39,7 @@ param_grid = {'C': [0.1, 1, 10, 100],
  'gamma': [1, 0.1, 0.01, 0.001, 0.00001, 10]}
 
 Running the Program:
+install the requirment.txt file - all the packages needed is there
 python classifier.py path_train path_val path_test
 path_train: Path to the training set directory
 path_val: Path to the validation set directory
