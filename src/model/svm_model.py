@@ -20,11 +20,11 @@ class SVM:
 
         for kernel in ['linear', 'rbf']:
             svm = SVC(kernel=kernel)
-            grid_search = GridSearchCV(svm, param_grid, cv=2, verbose=2, n_jobs=10)
+            grid_search = GridSearchCV(svm, param_grid, cv=2, verbose=2, n_jobs=6)
             print(len(self.train_images))
             print(len(self.train_labels))
             grid_search.fit(X=self.train_images, y=self.train_labels)
-
+        print("Best cross-validation score:", grid_search.best_score_)
         best_model = grid_search.best_estimator_
         self.model = best_model
 

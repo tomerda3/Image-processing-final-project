@@ -12,12 +12,11 @@ def extract_haralick_features(images):
 
 
 def extract_lbp_features(images, radius=1, points=8):
-    lbp_features = np.array([feature.local_binary_pattern(image, points, radius)
-                             for image in images])
-    return lbp_features.reshape(len(images), -1)  # Reshape for clarity
+    lbp_features = [feature.local_binary_pattern(image, points, radius, method="uniform").reshape(-1) for image in images]
+    return lbp_features
 
 
-def features_extract_combine(images, radius=1, points=8):
+def features_extract_combine(images, radius=3, points=24):
     # Extract Haralick features
     print("Extracting Haralick features...")
     haralick_features = extract_haralick_features(images)
