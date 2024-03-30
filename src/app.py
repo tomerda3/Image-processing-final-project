@@ -43,7 +43,7 @@ class App:
 
         model = SVM(x_train, y_train, x_test, y_test)
         print("start grid search...")
-        model.grid_search()
+        model.run_model()
         print("found the best parameters for model...")
         print("start predictions...")
         model.predict()

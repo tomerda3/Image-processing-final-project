@@ -1,2 +1,3 @@
 ./src/HHD_gender
 *.jpg
+saved_model.pkl

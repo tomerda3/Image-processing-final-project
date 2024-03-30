@@ -1,9 +1,7 @@
 import pickle
-
 from sklearn.model_selection import GridSearchCV
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
-
 
 class SVM:
 
@@ -14,7 +12,7 @@ class SVM:
         self.test_labels = test_labels
         self.model = None
 
-    def grid_search(self):
+    def run_model(self):
         param_grid = {'C': [0.1, 1, 10, 100],
                       'gamma': [1, 0.1, 0.01, 0.001, 0.00001, 10]}
 
@@ -27,9 +25,6 @@ class SVM:
 
         best_model = grid_search.best_estimator_
         self.model = best_model
-
-    def run_model(self):
-        self.model.fit(self.train_images, self.test_labels)
 
     def predict(self):
         predicted_labels = self.model.predict(self.test_images)
