@@ -20,13 +20,19 @@ class App:
             train_images += words
         train_labels = self.data_loader.train_labels
 
+        val_images = []
+        for image in self.data_loader.val_images:
+            words = self.pre_processor.regular_preprocess(image)
+            val_images += words
+        val_labels = self.data_loader.val_labels
+
         test_images = []
         for image in self.data_loader.test_images:
             words = self.pre_processor.regular_preprocess(image)
             test_images += words
         test_labels = self.data_loader.test_labels
 
-        return train_images, train_labels, test_images, test_labels
+        return train_images, train_labels, val_images, val_labels, test_images, test_labels
 
     def pre_process_data_word_extraction(self):
         train_images = []
@@ -53,16 +59,17 @@ class App:
     def run_model(self):
         #x_train1, y_train1, x_test1, y_test1 = self.pre_process_data_word_extraction()
 
-        x_train1, y_train1, x_test1, y_test1 = self.regular_preprocess()
+        x_train1, y_train1, x_val1, y_val1, x_test1, y_test1 = self.regular_preprocess()
 
         x_train, y_train = self.get_features(x_train1, y_train1)
+        x_val, y_val = self.get_features(x_val1, y_val1)
         x_test, y_test = self.get_features(x_test1, y_test1)
 
 
 
-        del x_train1, y_train1, x_test1, y_test1
+        del x_train1, y_train1,x_val1, y_val1, x_test1, y_test1
 
-        model = SVM(x_train, y_train, x_test, y_test)
+        model = SVM(x_train, y_train, x_val, y_val, x_test, y_test)
         print("start grid search...")
         model.run_model()
         print("found the best parameters for model...")
