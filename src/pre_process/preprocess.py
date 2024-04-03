@@ -34,5 +34,5 @@ class PreProcess:
         #gray_scale_image = cv2.cvtColor(resize_image, cv2.COLOR_BGR2GRAY)
         # return [gray_scale_image]  # Uncomment for grayscale input
 
-
         return [thresh]
+

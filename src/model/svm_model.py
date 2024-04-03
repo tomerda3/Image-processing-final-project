@@ -22,7 +22,7 @@ class SVM:
         for kernel in ['linear', 'rbf']:
             svm = SVC(kernel=kernel)
             if kernel == 'rbf':
-                grid_search = GridSearchCV(svm, param_grid, cv=2, verbose=2, n_jobs=6)
+                grid_search = GridSearchCV(svm, param_grid, cv=5, verbose=2, n_jobs=6)
                 grid_search.fit(self.train_images, self.train_labels)
                 best_model = grid_search.best_estimator_
                 best_models_array.append(best_model)
@@ -41,12 +41,14 @@ class SVM:
             predictions = model.predict(val_images)
             accuracy = accuracy_score(val_labels, predictions)
             print(f"Model {index} accuracy: {accuracy}")
-            print(f"Model Name {model.__str__()[0]} parameters: {model.get_params()}")
+            print(f"Model Name {model.__str__()} parameters: {model.get_params()}")
             index += 1
             if accuracy > best_accuracy:
                 best_model = model
                 best_accuracy = accuracy
-
+        # print the best model
+        print(f"Best model accuracy: {best_accuracy}")
+        print(f"Best model Name {best_model.__str__()} parameters: {best_model.get_params()}")
         return best_model
 
     def predict(self):

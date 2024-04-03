@@ -16,7 +16,7 @@ def extract_lbp_features(images, radius=1, points=8):
     return lbp_features
 
 
-def features_extract_combine(images, radius=3, points=24):
+def features_extract_combine(images, radius=1, points=8):
     # Extract Haralick features
     print("Extracting Haralick features...")
     haralick_features = extract_haralick_features(images)
