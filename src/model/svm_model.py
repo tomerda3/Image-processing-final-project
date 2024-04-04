@@ -63,7 +63,7 @@ class SVM:
         print("Accuracy:", accuracy)
         self.model_predicted_labels = predicted_labels
         best_params = self.model.get_params()
-        with open("txt.results", "w") as f:
+        with open("results.txt", "w") as f:
             f.write(f"The best model accuracy : {accuracy}\n")
             f.write(f"with this parameters: \n")
             for key, value in best_params.items():
@@ -104,5 +104,5 @@ class SVM:
         plt.xlabel('Predicted')
         plt.ylabel('True')
         plt.title('confusion_matrix_images')
-        plt.savefig(save_dir + "/confusion_matrix_images/" + model_name + "_" + data_name + ".png")
+        plt.savefig(save_dir + "/src/" + model_name + "_" + data_name + ".png")
         plt.close()

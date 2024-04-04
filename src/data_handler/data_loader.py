@@ -15,8 +15,8 @@ class DataLoader:
         self.mapping_labels = {'male': 0, 'female': 1}
         self.path = Path.cwd() / "HHD_gender"
         self.train_images, self.train_labels = self.load_images('train',path_args[0])
-        self.test_images, self.test_labels = self.load_images('test',path_args[1])
-        self.val_images, self.val_labels = self.load_images('val',path_args[2])
+        self.val_images, self.val_labels = self.load_images('val',path_args[1])
+        self.test_images, self.test_labels = self.load_images('test',path_args[2])
 
     @property
     def train(self):

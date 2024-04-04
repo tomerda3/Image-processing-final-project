@@ -1,13 +1,13 @@
-The best model accuracy : 0.5392857142857143
+The best model accuracy : 0.7
 with this parameters: 
-C: 10
+C: 0.1
 break_ties: False
 cache_size: 200
 class_weight: None
 coef0: 0.0
 decision_function_shape: ovr
 degree: 3
-gamma: 0.001
+gamma: 1e-05
 kernel: rbf
 max_iter: -1
 probability: False
