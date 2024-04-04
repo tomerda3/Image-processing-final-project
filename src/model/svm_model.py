@@ -2,6 +2,11 @@ import pickle
 from sklearn.model_selection import GridSearchCV
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+from pathlib import Path
+import os
 
 class SVM:
 
@@ -13,6 +18,7 @@ class SVM:
         self.val_images = val_images
         self.val_labels = val_labels
         self.model = None
+        self.model_predicted_labels = None
 
     def run_model(self):
         param_grid = {'C': [0.1, 1, 10, 100],
@@ -55,6 +61,13 @@ class SVM:
         predicted_labels = self.model.predict(self.test_images)
         accuracy = accuracy_score(self.test_labels, predicted_labels)
         print("Accuracy:", accuracy)
+        self.model_predicted_labels = predicted_labels
+        best_params = self.model.get_params()
+        with open("txt.results", "w") as f:
+            f.write(f"The best model accuracy : {accuracy}\n")
+            f.write(f"with this parameters: \n")
+            for key, value in best_params.items():
+                f.write(f"{key}: {value}\n")
 
     def save_model(self, filename="saved_model.pkl"):
         if self.load_model() is None:
@@ -72,3 +85,24 @@ class SVM:
             self.model = pickle.load(f)
         print(f"Model loaded from: {filename}")
         return self.model
+
+    def make_confusion_matrix(self):
+        test_labels = self.test_labels
+        predictions = self.model_predicted_labels
+
+        # Convert both predictions and test_labels to class labels
+        class_labels = ["Male", "Female"]
+        predictions = [class_labels[int(p)] for p in predictions]
+        test_labels = [class_labels[int(l)] for l in test_labels]
+
+        model_name = "SVM"
+        data_name = "Confusion_Matrix"
+        save_dir = os.path.join(Path.cwd())
+        cm = confusion_matrix(test_labels, predictions, labels=class_labels)
+        plt.figure(figsize=(8, 6))
+        sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=class_labels, yticklabels=class_labels)
+        plt.xlabel('Predicted')
+        plt.ylabel('True')
+        plt.title('confusion_matrix_images')
+        plt.savefig(save_dir + "/confusion_matrix_images/" + model_name + "_" + data_name + ".png")
+        plt.close()
